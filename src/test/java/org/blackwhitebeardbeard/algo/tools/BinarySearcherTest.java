@@ -59,11 +59,14 @@ public class BinarySearcherTest {
     public static Stream<Arguments> provideArguments() {
         return Stream
                 .of(
+                        // Legit cases
                         new IsElementPresentInArrayTestInput(new Double[] { 1.0, 31.0, 41.0, 51.0, 61.0, 101.0 }, 31.0, Double::compareTo, Optional.empty(), Optional.of(true)),
                         new IsElementPresentInArrayTestInput(new Double[] { 1.0, 31.0, 41.0, 51.0, 61.0, 101.0 }, 30.0, Double::compareTo, Optional.empty(), Optional.of(false)),
                         new IsElementPresentInArrayTestInput(new Double[] { 1.0 }, 30.0, Double::compareTo, Optional.empty(), Optional.of(false)),
-                        new IsElementPresentInArrayTestInput(null, 15.2, Double::compareTo, Optional.of(IllegalArgumentException.class), Optional.empty()),
-                        new IsElementPresentInArrayTestInput(new Double[] { 1.0, 31.0, 41.0, 51.0, 61.0, 101.0 }, 30.0, null, Optional.of(IllegalArgumentException.class), Optional.empty()))
+                        new IsElementPresentInArrayTestInput(new Double[] {}, 30.0, Double::compareTo, Optional.empty(), Optional.of(false)),
+                        // Null cases.
+                        new IsElementPresentInArrayTestInput(null, 15.2, Double::compareTo, Optional.of(NullPointerException.class), Optional.empty()),
+                        new IsElementPresentInArrayTestInput(new Double[] { 1.0, 31.0, 41.0, 51.0, 61.0, 101.0 }, 30.0, null, Optional.of(NullPointerException.class), Optional.empty()))
                 .map(Arguments::of);
     }
 }

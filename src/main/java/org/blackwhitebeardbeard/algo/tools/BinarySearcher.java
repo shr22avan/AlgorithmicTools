@@ -1,5 +1,7 @@
 package org.blackwhitebeardbeard.algo.tools;
 
+import lombok.NonNull;
+
 import java.util.Comparator;
 
 /**
@@ -10,15 +12,13 @@ public class BinarySearcher {
     /**
      * Checks if an element is present in an array using binary search.
      * @param tArray input array to check in (non-null)
-     * @param t element to search for in the array
+     * @param t element to search for in the array (can be null if comparator can compare null)
      * @param tComparator {@link Comparator} of T to check <>= for T (non-null)
      * @return true if found in array, false otherwise
      * @param <T> type of array and search element
      */
-    public static <T> boolean IsElementPresentInArray(final T[] tArray, final T t, final Comparator<T> tComparator) {
-        if (tArray == null || tComparator == null) {
-            throw new IllegalArgumentException("Expecting input array and comparators to be non-null.");
-        }
+    public static <T> boolean IsElementPresentInArray(
+            @NonNull final T[] tArray, final T t, @NonNull final Comparator<T> tComparator) {
 
         int low = 0;
         int high = tArray.length - 1;
